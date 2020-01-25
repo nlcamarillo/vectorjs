@@ -1,5 +1,9 @@
 # Vector
 
+```
+    npm install flexible-vector
+```
+
 flexible vector tooling for typescript and javascript
 
 ```
@@ -35,6 +39,7 @@ use `vector2`, `vector3` and `vector4` to get augmented vectors that have specia
 -   `plus` addition of two (equal size) vectors
 -   `minus` addition of two (equal size) vectors
 -   `times` multiplication by a scalar
+-   `equals` check whether a vector equals another
 
 We also provide syntax sugar methods for the above. These destroy writability, but improve readability. Only use with proper intellisense.
 
