@@ -12,6 +12,10 @@ class BaseVector {
     public get size(): number {
         return this.components.length;
     }
+    public equals(other: Vector): boolean {
+        let o = other.toArray();
+        return this.components.every((c, i) => c === o[i]);
+    }
     public n2(): number {
         return this.components.reduce((sum, c) => sum + c * c, 0);
     }
@@ -81,8 +85,8 @@ class BaseVector4 extends BaseVector3 {
     }
 }
 
-interface Vector extends BaseVector {}
-interface Vector2 extends BaseVector2 {
+export interface Vector extends BaseVector {}
+export interface Vector2 extends BaseVector2 {
     xy: Vector;
     xz: Vector;
     yx: Vector;
@@ -90,7 +94,7 @@ interface Vector2 extends BaseVector2 {
     zx: Vector;
     zy: Vector;
 }
-interface Vector3 extends Vector2, BaseVector3 {
+export interface Vector3 extends Vector2, BaseVector3 {
     rg: Vector;
     rb: Vector;
     gr: Vector;
@@ -108,7 +112,7 @@ interface Vector3 extends Vector2, BaseVector3 {
     bgr: Vector;
 }
 
-interface Vector4 extends Vector3, BaseVector4 {
+export interface Vector4 extends Vector3, BaseVector4 {
     ra: Vector;
     ga: Vector;
     ba: Vector;

@@ -1,11 +1,14 @@
 {
-    "name": "module-vector",
+    "name": "flexible-vector",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "./lib/index.js",
+    "types": "./lib/index.d.ts",
     "scripts": {
         "test": "jest --watch",
-        "watch": "tsc -w"
+        "watch": "tsc -w",
+        "build": "tsc",
+        "prepublish": "tsc"
     },
     "author": "",
     "license": "ISC",

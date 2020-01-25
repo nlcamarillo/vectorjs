@@ -1,4 +1,4 @@
-import { vector, vector3, vector4 } from "../";
+import { vector, vector2, vector3, vector4 } from "../";
 
 test("creating a 3 vector, checking xyz components", () => {
     let v = vector3(1, 2, 3);
@@ -15,8 +15,8 @@ test("creating a 4 vector, checking rgba components", () => {
 });
 test("multiple components as subvector", () => {
     let v = vector4(1, 2, 3, 4);
-    expect(v.rg.toArray()).toStrictEqual([1, 2]);
-    expect(v.bgr.toArray()).toStrictEqual([3, 2, 1]);
+    expect(v.rg.equals(vector2(1, 2))).toBe(true);
+    expect(v.bgr.equals(vector3(3, 2, 1))).toBe(true);
 });
 test("dot product", () => {
     let v1 = vector(1, 2);
@@ -26,18 +26,18 @@ test("dot product", () => {
 test("vector addition", () => {
     let v1 = vector(1, 2);
     let v2 = vector(1, 0);
-    expect(v1.plus(v2).toArray()).toStrictEqual([2, 2]);
+    expect(v1.plus(v2).equals(vector2(2, 2))).toBe(true);
 });
 test("vector subtraction", () => {
     let v1 = vector(1, 2);
     let v2 = vector(1, 0);
-    expect(v1.minus(v2).toArray()).toStrictEqual([0, 2]);
+    expect(v1.minus(v2).equals(vector2(0, 2))).toBe(true);
 });
 test("special character methods", () => {
     let v1 = vector(1, 2);
     let v2 = vector(1, 0);
     expect(v1.ⵙ(v2)).toBe(1);
-    expect(v1.ⵜ(v2).toArray()).toStrictEqual([2, 2]);
+    expect(v1.ⵜ(v2).equals(vector2(2, 2))).toBe(true);
     expect(
         v1
             .ᜭ(v2)
