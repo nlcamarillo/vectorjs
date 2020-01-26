@@ -13,26 +13,49 @@ class BaseVector {
     }
     // implementing the iterator protocol
     [Symbol.iterator] = createIterator(this);
-
+    public inspect() {
+        return `Vector[${this.components.join(",")}]`;
+    }
+    /**
+     * returns the components in an array. Note you can also use the iterator pattern
+     */
     public toArray(): number[] {
         return this.components;
     }
+    /**
+     * get a component from the vector
+     */
     public get(index: number) {
         return this.components[index];
     }
+    /**
+     * the dimensionality of the vector
+     */
     public get size(): number {
         return this.components.length;
     }
+    /**
+     * heck whether a vector equals another
+     */
     public equals(other: Vector): boolean {
         let o = other.toArray();
         return this.components.every((c, i) => c === o[i]);
     }
+    /**
+     * squared norm of the vector
+     */
     public n2(): number {
         return this.components.reduce((sum, c) => sum + c * c, 0);
     }
+    /**
+     * norm of the vector
+     */
     public norm(): number {
         return Math.sqrt(this.n2());
     }
+    /**
+     * inner product with another vector
+     */
     public dot(other: Vector) {
         if (other.size !== this.size) {
             throw new Error(
@@ -42,21 +65,33 @@ class BaseVector {
         let o = other.toArray();
         return this.components.reduce((sum, c, i) => sum + c * o[i], 0);
     }
+    /**
+     * adds another vector to this one
+     */
     public plus(other: Vector) {
         if (other.size !== this.size) {
             throw new Error(
-                `can only dot product vectors of same size, got ${this.size} and ${other.size}`
+                `can only add product vectors of same size, got ${this.size} and ${other.size}`
             );
         }
         let o = other.toArray();
         return vector(...this.components.map((c, i) => c + o[i]));
     }
+    /**
+     * multiplies by a scalar
+     */
     public times(scalar: number) {
         return vector(...this.components.map(c => c * scalar));
     }
+    /**
+     * subtracts another vector from this one
+     */
     public minus(other: Vector) {
         return this.plus(other.times(-1));
     }
+    /**
+     * normalizes the vector to length 1 or 0 if it was already 0
+     */
     public normalize() {
         let n = this.norm();
         if (n === 0) return this;

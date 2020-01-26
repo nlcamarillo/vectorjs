@@ -56,3 +56,5 @@ test("special character methods", () => {
             .toArray()
     ).toStrictEqual([0, 4]);
 });
+
+console.log(vector(1, 2, 3));
