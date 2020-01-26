@@ -1,8 +1,19 @@
+const createIterator = (v: BaseVector) => {
+    return function*() {
+        for (let i = 0; i < v.size; i++) {
+            yield v.get(i);
+        }
+    };
+};
+
 class BaseVector {
     protected components: number[];
     constructor(..._components: number[]) {
         this.components = _components;
     }
+    // implementing the iterator protocol
+    [Symbol.iterator] = createIterator(this);
+
     public toArray(): number[] {
         return this.components;
     }
@@ -146,13 +157,14 @@ export interface Vector4 extends Vector3, BaseVector4 {
 const extendVector = (v: BaseVector) => {
     return new Proxy(v, {
         get: (obj, prop: string) => {
-            // console.log("getting", prop, "from", obj);
             if (obj[prop]) {
                 return obj[prop];
             } else if (prop.length > 1 && prop.match(/[xyz]+|[rgba]+/)) {
                 let names = prop.split("");
                 let values = names.map(name => obj[name]);
                 return new BaseVector(...values);
+            } else if (prop.match(/\d+/)) {
+                return obj.get(parseInt(prop, 10));
             }
         }
     });

@@ -1,5 +1,16 @@
 import { vector, vector2, vector3, vector4 } from "../";
 
+test("component access", () => {
+    let v = vector3(1, 2, 3);
+    expect(v[0]).toBe(1);
+    expect(v[1]).toBe(2);
+    expect(v[2]).toBe(3);
+});
+test("iterator pattern", () => {
+    let v = vector3(1, 2, 3);
+    expect([...v]).toStrictEqual([1, 2, 3]);
+});
+
 test("creating a 3 vector, checking xyz components", () => {
     let v = vector3(1, 2, 3);
     expect(v.x).toBe(1);

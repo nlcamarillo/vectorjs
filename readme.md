@@ -4,12 +4,13 @@
     npm install flexible-vector
 ```
 
-flexible vector tooling for typescript and javascript
+flexible vector tooling for typescript and javascript. Supporting numeric component access, iterator protocol and flexible name based access.
 
 ```
     import {vector} from 'vector';
 
     let v1 = vector(1,2,3);
+    v1[2];          // 3;
     v1.get(2);      // 3;
 ```
 
@@ -29,6 +30,15 @@ use `vector2`, `vector3` and `vector4` to get augmented vectors that have specia
 
     // or even permutations
     v1.bgr; // vector(3,2,1);
+```
+
+## supports iterator pattern
+
+```
+    import {vector} from 'vector';
+
+    let v1 = vector(1,2,3);
+    [...v];         // [1,2,3];
 ```
 
 ## supports vector operations

@@ -23,7 +23,8 @@
         "isolatedModules": false,
         "noEmit": false,
         "declaration": true,
-        "stripInternal": true
+        "stripInternal": true,
+        "downlevelIteration": true
     },
     "exclude": ["node_modules", "dist"],
     "include": ["src"]
