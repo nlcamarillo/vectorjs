@@ -194,12 +194,14 @@ const extendVector = (v: BaseVector) => {
         get: (obj, prop: string) => {
             if (obj[prop]) {
                 return obj[prop];
-            } else if (prop.length > 1 && prop.match(/[xyz]+|[rgba]+/)) {
-                let names = prop.split("");
-                let values = names.map(name => obj[name]);
-                return new BaseVector(...values);
-            } else if (prop.match(/\d+/)) {
-                return obj.get(parseInt(prop, 10));
+            } else if (typeof prop === "string") {
+                if (prop.length > 1 && prop.match(/[xyz]+|[rgba]+/)) {
+                    let names = prop.split("");
+                    let values = names.map(name => obj[name]);
+                    return new BaseVector(...values);
+                } else if (prop.match(/\d+/)) {
+                    return obj.get(parseInt(prop, 10));
+                }
             }
         }
     });
