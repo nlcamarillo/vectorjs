@@ -103,10 +103,6 @@ class BaseVector {
         if (n === 0) return this;
         return this.times(1 / n);
     }
-    public ⵙ = this.dot;
-    public ⵜ = this.plus;
-    public ᜭ = this.minus;
-    public х = this.times;
 }
 
 class BaseVector2 extends BaseVector {

@@ -71,15 +71,3 @@ test("vector subtraction", () => {
     let v2 = vector(1, 0);
     expect(v1.minus(v2).equals(vector2(0, 2))).toBe(true);
 });
-test("special character methods", () => {
-    let v1 = vector(1, 2);
-    let v2 = vector(1, 0);
-    expect(v1.ⵙ(v2)).toBe(1);
-    expect(v1.ⵜ(v2).equals(vector2(2, 2))).toBe(true);
-    expect(
-        v1
-            .ᜭ(v2)
-            .х(2)
-            .toArray()
-    ).toStrictEqual([0, 4]);
-});
