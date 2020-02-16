@@ -7,7 +7,7 @@
 flexible vector tooling for typescript and javascript. Supporting numeric component access, iterator protocol and flexible name based access.
 
 ```
-    import {vector} from 'vector';
+    import {vector} from 'flexible-vector';
 
     let v1 = vector(1,2,3);
     v1[2];          // 3;
@@ -23,7 +23,7 @@ use `vector2`, `vector3` and `vector4` to get augmented vectors that have specia
 `vector4` has r,g,b,a and x,y,z and permutations thereof
 
 ```
-    import {vector3} from 'vector';
+    import {vector3} from 'flexible-vector';
 
     let v1 = vector3(1,2,3);
     v1.rg;  // vector(1,2);
@@ -32,10 +32,19 @@ use `vector2`, `vector3` and `vector4` to get augmented vectors that have specia
     v1.bgr; // vector(3,2,1);
 ```
 
+Setters are also supported, however, we discourage their use. Better to treat vectors as immutable.
+
+```
+    let v1 = vector3(1,2,3);
+    v1[2] = 5;
+    v1.xy = v1.yz;
+    v1.z = 6;   //vector(2,5,6);
+```
+
 ## supports iterator pattern
 
 ```
-    import {vector} from 'vector';
+    import {vector} from 'flexible-vector';
 
     let v1 = vector(1,2,3);
     [...v];         // [1,2,3];

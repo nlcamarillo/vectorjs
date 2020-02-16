@@ -29,6 +29,12 @@ class BaseVector {
         return this.components[index];
     }
     /**
+     * set a component of the vector
+     */
+    public set(index: number, value: number) {
+        this.components[index] = value;
+    }
+    /**
      * the dimensionality of the vector
      */
     public get size(): number {
@@ -107,27 +113,48 @@ class BaseVector2 extends BaseVector {
     get x() {
         return this.components[0];
     }
+    set x(value: number) {
+        this.components[0] = value;
+    }
     get y() {
         return this.components[1];
+    }
+    set y(value: number) {
+        this.components[1] = value;
     }
 }
 class BaseVector3 extends BaseVector2 {
     get z() {
         return this.components[2];
     }
+    set z(value: number) {
+        this.components[2] = value;
+    }
     get r() {
         return this.components[0];
+    }
+    set r(value: number) {
+        this.components[0] = value;
     }
     get g() {
         return this.components[1];
     }
+    set g(value: number) {
+        this.components[1] = value;
+    }
     get b() {
         return this.components[2];
+    }
+    set b(value: number) {
+        this.components[2] = value;
     }
 }
 class BaseVector4 extends BaseVector3 {
     get a() {
         return this.components[3];
+    }
+    set a(value: number) {
+        this.components[3] = value;
     }
 }
 
@@ -198,17 +225,41 @@ const extendVector = (v: BaseVector) => {
                 if (prop.length > 1 && prop.match(/[xyz]+|[rgba]+/)) {
                     let names = prop.split("");
                     let values = names.map(name => obj[name]);
-                    return new BaseVector(...values);
+                    return vector(...values);
                 } else if (prop.match(/\d+/)) {
                     return obj.get(parseInt(prop, 10));
                 }
             }
+        },
+        set: (obj, prop: string, value: any, receiver: any) => {
+            if (typeof prop === "string") {
+                if (prop.length > 1 && prop.match(/[xyz]+|[rgba]+/)) {
+                    let names = prop.split("");
+                    names.forEach((name, index) => {
+                        obj[name] = value[index];
+                    });
+                    return true;
+                } else if (prop.match(/\d+/)) {
+                    obj.set(parseInt(prop, 10), value);
+                    return true;
+                }
+            }
+            return Reflect.set(obj, prop, value, receiver);
         }
     });
 };
 
 export const vector = (...components: number[]): Vector => {
-    return extendVector(new BaseVector(...components)) as Vector;
+    switch (components.length) {
+        case 2:
+            return vector2(...components);
+        case 3:
+            return vector3(...components);
+        case 4:
+            return vector4(...components);
+        default:
+            return extendVector(new BaseVector(...components)) as Vector;
+    }
 };
 
 export const vector2 = (...components: number[]): Vector2 => {
