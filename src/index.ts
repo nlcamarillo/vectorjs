@@ -110,12 +110,18 @@ class BaseVector {
 }
 
 class BaseVector2 extends BaseVector {
+    /**
+     * the x (0) component
+     */
     get x() {
         return this.components[0];
     }
     set x(value: number) {
         this.components[0] = value;
     }
+    /**
+     * the y (1) component
+     */
     get y() {
         return this.components[1];
     }
@@ -124,24 +130,36 @@ class BaseVector2 extends BaseVector {
     }
 }
 class BaseVector3 extends BaseVector2 {
+    /**
+     * the z (2) component
+     */
     get z() {
         return this.components[2];
     }
     set z(value: number) {
         this.components[2] = value;
     }
+    /**
+     * the red (0) component
+     */
     get r() {
         return this.components[0];
     }
     set r(value: number) {
         this.components[0] = value;
     }
+    /**
+     * the green (1) component
+     */
     get g() {
         return this.components[1];
     }
     set g(value: number) {
         this.components[1] = value;
     }
+    /**
+     * the blue (2) component
+     */
     get b() {
         return this.components[2];
     }
@@ -150,6 +168,9 @@ class BaseVector3 extends BaseVector2 {
     }
 }
 class BaseVector4 extends BaseVector3 {
+    /**
+     * the alpha (3) component
+     */
     get a() {
         return this.components[3];
     }
@@ -160,59 +181,185 @@ class BaseVector4 extends BaseVector3 {
 
 export interface Vector extends BaseVector {}
 export interface Vector2 extends BaseVector2 {
+    /**
+     * the x and y component as Vector2
+     */
     xy: Vector;
+    /**
+     * the x and z component as Vector2
+     */
     xz: Vector;
+    /**
+     * the y and x component as Vector2
+     */
     yx: Vector;
+    /**
+     * the y and z component as Vector2
+     */
     yz: Vector;
+    /**
+     * the z and x component as Vector2
+     */
     zx: Vector;
+    /**
+     * the z and y component as Vector2
+     */
     zy: Vector;
 }
 export interface Vector3 extends Vector2, BaseVector3 {
+    /**
+     * the red and green component as Vector2
+     */
     rg: Vector;
+    /**
+     * the red and blue component as Vector2
+     */
     rb: Vector;
+    /**
+     * the green and red component as Vector2
+     */
     gr: Vector;
+    /**
+     * the green and blue component as Vector2
+     */
     gb: Vector;
+    /**
+     * the blue and red component as Vector2
+     */
     br: Vector;
+    /**
+     * the blue and green component as Vector2
+     */
     bg: Vector;
 
+    /**
+     * the red, green and blue component as Vector3
+     */
     rgb: Vector;
+    /**
+     * the red, blue and green component as Vector3
+     */
     rbg: Vector;
 
+    /**
+     * the green, red and blue component as Vector3
+     */
     grb: Vector;
+    /**
+     * the green, blue and red component as Vector3
+     */
     gbr: Vector;
 
+    /**
+     * the blue, red and green component as Vector3
+     */
     brg: Vector;
+    /**
+     * the blue, green and red component as Vector3
+     */
     bgr: Vector;
 }
 
 export interface Vector4 extends Vector3, BaseVector4 {
+    /**
+     * the red and alpha component as Vector2
+     */
     ra: Vector;
+    /**
+     * the green and alpha component as Vector2
+     */
     ga: Vector;
+    /**
+     * the blue and alpha component as Vector2
+     */
     ba: Vector;
+    /**
+     * the alpha and red component as Vector2
+     */
     ar: Vector;
+    /**
+     * the alpha and green component as Vector2
+     */
     ag: Vector;
+    /**
+     * the alpha and blue component as Vector2
+     */
     ab: Vector;
 
+    /**
+     * the red, green and alpha component as Vector3
+     */
     rga: Vector;
+    /**
+     * the red, blue and alpha component as Vector3
+     */
     rba: Vector;
+    /**
+     * the red, alpha and green component as Vector3
+     */
     rag: Vector;
+    /**
+     * the red, alpha and blue component as Vector3
+     */
     rab: Vector;
 
+    /**
+     * the green, red and alpha component as Vector3
+     */
     gra: Vector;
+    /**
+     * the green, blue and alpha component as Vector3
+     */
     gba: Vector;
+    /**
+     * the green, alpha and red component as Vector3
+     */
     gar: Vector;
+    /**
+     * the green, alpha and blue component as Vector3
+     */
     gab: Vector;
 
+    /**
+     * the blue, red and alpha component as Vector3
+     */
     bra: Vector;
+    /**
+     * the blue, green and alpha component as Vector3
+     */
     bga: Vector;
+    /**
+     * the blue, alpha and red component as Vector3
+     */
     bar: Vector;
+    /**
+     * the blue, alpha and green component as Vector3
+     */
     bag: Vector;
 
+    /**
+     * the alpha, red and green component as Vector3
+     */
     arg: Vector;
+    /**
+     * the alpha, red and blue component as Vector3
+     */
     arb: Vector;
+    /**
+     * the alpha, green and red component as Vector3
+     */
     agr: Vector;
+    /**
+     * the alpha, green and blue component as Vector3
+     */
     agb: Vector;
+    /**
+     * the alpha, blue and red component as Vector3
+     */
     abr: Vector;
+    /**
+     * the alpha, blue and green component as Vector3
+     */
     abg: Vector;
 }
 
