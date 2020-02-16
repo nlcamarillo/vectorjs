@@ -41,7 +41,7 @@ class BaseVector {
         return this.components.length;
     }
     /**
-     * heck whether a vector equals another
+     * check whether a vector equals another
      */
     public equals(other: Vector): boolean {
         let o = other.toArray();
