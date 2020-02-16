@@ -62,12 +62,23 @@ test("dot product", () => {
     expect(v1.dot(v2)).toBe(1);
 });
 test("vector addition", () => {
-    let v1 = vector(1, 2);
-    let v2 = vector(1, 0);
-    expect(v1.plus(v2).equals(vector2(2, 2))).toBe(true);
+    let v1 = vector2(1, 2);
+    let v2 = vector2(1, 0);
+    let res = v1.plus(v2);
+    expect(res.x).toBe(2);
+    expect(res.y).toBe(2);
 });
 test("vector subtraction", () => {
-    let v1 = vector(1, 2);
-    let v2 = vector(1, 0);
-    expect(v1.minus(v2).equals(vector2(0, 2))).toBe(true);
+    let v1 = vector2(1, 2);
+    let v2 = vector2(1, 0);
+    let res = v1.minus(v2);
+    expect(res.x).toBe(0);
+    expect(res.y).toBe(2);
+});
+test("add different length vectors", () => {
+    let v1 = vector(1, 2, 3);
+    let v2 = vector(1, 2);
+    expect(() => v1.plus(v2)).toThrow(
+        "can only add product vectors of same size, got 3 and 2"
+    );
 });

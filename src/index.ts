@@ -62,7 +62,7 @@ class BaseVector {
     /**
      * inner product with another vector
      */
-    public dot(other: Vector) {
+    public dot(other: Vector): number {
         if (other.size !== this.size) {
             throw new Error(
                 `can only dot product vectors of same size, got ${this.size} and ${other.size}`
@@ -74,7 +74,7 @@ class BaseVector {
     /**
      * adds another vector to this one
      */
-    public plus(other: Vector) {
+    public plus(other: Vector): Vector {
         if (other.size !== this.size) {
             throw new Error(
                 `can only add product vectors of same size, got ${this.size} and ${other.size}`
@@ -86,19 +86,19 @@ class BaseVector {
     /**
      * multiplies by a scalar
      */
-    public times(scalar: number) {
+    public times(scalar: number): Vector {
         return vector(...this.components.map(c => c * scalar));
     }
     /**
      * subtracts another vector from this one
      */
-    public minus(other: Vector) {
+    public minus(other: Vector): Vector {
         return this.plus(other.times(-1));
     }
     /**
      * normalizes the vector to length 1 or 0 if it was already 0
      */
-    public normalize() {
+    public normalize(): Vector {
         let n = this.norm();
         if (n === 0) return this;
         return this.times(1 / n);
@@ -201,6 +201,11 @@ export interface Vector2 extends BaseVector2 {
      * the z and y component as Vector2
      */
     zy: Vector;
+
+    plus(other: Vector2): Vector2;
+    times(scalar: number): Vector2;
+    minus(other: Vector2): Vector2;
+    normalize(): Vector2;
 }
 export interface Vector3 extends Vector2, BaseVector3 {
     /**
@@ -254,6 +259,11 @@ export interface Vector3 extends Vector2, BaseVector3 {
      * the blue, green and red component as Vector3
      */
     bgr: Vector;
+
+    plus(other: Vector3): Vector3;
+    times(scalar: number): Vector3;
+    minus(other: Vector3): Vector3;
+    normalize(): Vector3;
 }
 
 export interface Vector4 extends Vector3, BaseVector4 {
@@ -357,15 +367,20 @@ export interface Vector4 extends Vector3, BaseVector4 {
      * the alpha, blue and green component as Vector3
      */
     abg: Vector;
+
+    plus(other: Vector4): Vector4;
+    times(scalar: number): Vector4;
+    minus(other: Vector4): Vector4;
+    normalize(): Vector4;
 }
 
 const extendVector = (v: BaseVector) => {
     return new Proxy(v, {
         get: (obj, prop: string) => {
-            if (obj[prop]) {
+            if (obj[prop] !== undefined) {
                 return obj[prop];
             } else if (typeof prop === "string") {
-                if (prop.length > 1 && prop.match(/[xyz]+|[rgba]+/)) {
+                if (prop.length > 1 && prop.match(/[xyz]{2,3}|[rgba]{2,4}/)) {
                     let names = prop.split("");
                     let values = names.map(name => obj[name]);
                     return vector(...values);
@@ -376,7 +391,7 @@ const extendVector = (v: BaseVector) => {
         },
         set: (obj, prop: string, value: any, receiver: any) => {
             if (typeof prop === "string") {
-                if (prop.length > 1 && prop.match(/[xyz]+|[rgba]+/)) {
+                if (prop.length > 1 && prop.match(/[xyz]{2,3}|[rgba]{2,4}/)) {
                     let names = prop.split("");
                     names.forEach((name, index) => {
                         obj[name] = value[index];
