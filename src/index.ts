@@ -14,7 +14,7 @@ class BaseVector {
     // implementing the iterator protocol
     [Symbol.iterator] = createIterator(this);
     public inspect() {
-        return `Vector[${this.components.join(",")}]`;
+        return `Vector(${this.components.join(",")})`;
     }
     /**
      * returns the components in an array. Note you can also use the iterator pattern
