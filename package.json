@@ -1,7 +1,13 @@
 {
     "name": "flexible-vector",
     "version": "1.1.0",
-    "description": "",
+    "description": "Javascript vector library with flexible accessors",
+    "keywords": [
+        "Vector",
+        "Operations",
+        "Indexed",
+        "Iterator"
+    ],
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
     "scripts": {
@@ -12,6 +18,11 @@
     },
     "author": "",
     "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nlcamarillo/vectorjs.git"
+    },
+    "homepage": "https://github.com/nlcamarillo/vectorjs#readme",
     "dependencies": {
         "typescript": "^3.7.5"
     },
