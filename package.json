@@ -1,6 +1,6 @@
 {
     "name": "flexible-vector",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Javascript vector library with flexible accessors",
     "keywords": [
         "Vector",
@@ -10,6 +10,9 @@
     ],
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
+    "files": [
+        "lib/**/*"
+    ],
     "scripts": {
         "test": "jest --watch",
         "watch": "tsc -w",
@@ -23,12 +26,11 @@
         "url": "https://github.com/nlcamarillo/vectorjs.git"
     },
     "homepage": "https://github.com/nlcamarillo/vectorjs#readme",
-    "dependencies": {
-        "typescript": "^3.7.5"
-    },
+    "dependencies": {},
     "devDependencies": {
         "@types/jest": "^24.9.1",
         "jest": "^25.1.0",
-        "ts-jest": "^25.0.0"
+        "ts-jest": "^25.0.0",
+        "typescript": "^3.7.5"
     }
 }
