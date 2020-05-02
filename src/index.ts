@@ -1,5 +1,5 @@
 const createIterator = (v: BaseVector) => {
-    return function*() {
+    return function* () {
         for (let i = 0; i < v.size; i++) {
             yield v.get(i);
         }
@@ -87,7 +87,7 @@ class BaseVector {
      * multiplies by a scalar
      */
     public times(scalar: number): Vector {
-        return vector(...this.components.map(c => c * scalar));
+        return vector(...this.components.map((c) => c * scalar));
     }
     /**
      * subtracts another vector from this one
@@ -123,6 +123,19 @@ class BaseVector2 extends BaseVector {
     }
     set y(value: number) {
         this.components[1] = value;
+    }
+}
+class RealVector2 extends BaseVector2 {
+    /**
+     * rotate the vector
+     */
+    public rotate(angle: number): Vector2 {
+        let ca = Math.cos(angle);
+        let sa = Math.sin(angle);
+        return vector2(this.x * ca - this.y * sa, this.x * sa + this.y * ca);
+    }
+    public cross(other: Vector2): number {
+        return this.x * other.y - this.y * other.x;
     }
 }
 class BaseVector3 extends BaseVector2 {
@@ -176,198 +189,205 @@ class BaseVector4 extends BaseVector3 {
 }
 
 export interface Vector extends BaseVector {}
-export interface Vector2 extends BaseVector2 {
+interface BaseVector2WithAccessors extends BaseVector2 {
     /**
      * the x and y component as Vector2
      */
-    xy: Vector;
+    xy: Vector2;
     /**
      * the x and z component as Vector2
      */
-    xz: Vector;
+    xz: Vector2;
     /**
      * the y and x component as Vector2
      */
-    yx: Vector;
+    yx: Vector2;
     /**
      * the y and z component as Vector2
      */
-    yz: Vector;
+    yz: Vector2;
     /**
      * the z and x component as Vector2
      */
-    zx: Vector;
+    zx: Vector2;
     /**
      * the z and y component as Vector2
      */
-    zy: Vector;
-
+    zy: Vector2;
+}
+export interface Vector2 extends BaseVector2WithAccessors, RealVector2 {
     plus(other: Vector2): Vector2;
     times(scalar: number): Vector2;
     minus(other: Vector2): Vector2;
     normalize(): Vector2;
 }
-export interface Vector3 extends Vector2, BaseVector3 {
+interface BaseVector3WithAccessors
+    extends BaseVector2WithAccessors,
+        BaseVector3 {
     /**
      * the red and green component as Vector2
      */
-    rg: Vector;
+    rg: Vector2;
     /**
      * the red and blue component as Vector2
      */
-    rb: Vector;
+    rb: Vector2;
     /**
      * the green and red component as Vector2
      */
-    gr: Vector;
+    gr: Vector2;
     /**
      * the green and blue component as Vector2
      */
-    gb: Vector;
+    gb: Vector2;
     /**
      * the blue and red component as Vector2
      */
-    br: Vector;
+    br: Vector2;
     /**
      * the blue and green component as Vector2
      */
-    bg: Vector;
+    bg: Vector2;
 
     /**
      * the red, green and blue component as Vector3
      */
-    rgb: Vector;
+    rgb: Vector3;
     /**
      * the red, blue and green component as Vector3
      */
-    rbg: Vector;
+    rbg: Vector3;
 
     /**
      * the green, red and blue component as Vector3
      */
-    grb: Vector;
+    grb: Vector3;
     /**
      * the green, blue and red component as Vector3
      */
-    gbr: Vector;
+    gbr: Vector3;
 
     /**
      * the blue, red and green component as Vector3
      */
-    brg: Vector;
+    brg: Vector3;
     /**
      * the blue, green and red component as Vector3
      */
-    bgr: Vector;
-
+    bgr: Vector3;
+}
+export interface Vector3 extends BaseVector3WithAccessors {
     plus(other: Vector3): Vector3;
     times(scalar: number): Vector3;
     minus(other: Vector3): Vector3;
     normalize(): Vector3;
 }
 
-export interface Vector4 extends Vector3, BaseVector4 {
+interface BaseVector4WithAccessors
+    extends BaseVector3WithAccessors,
+        BaseVector4 {
     /**
      * the red and alpha component as Vector2
      */
-    ra: Vector;
+    ra: Vector2;
     /**
      * the green and alpha component as Vector2
      */
-    ga: Vector;
+    ga: Vector2;
     /**
      * the blue and alpha component as Vector2
      */
-    ba: Vector;
+    ba: Vector2;
     /**
      * the alpha and red component as Vector2
      */
-    ar: Vector;
+    ar: Vector2;
     /**
      * the alpha and green component as Vector2
      */
-    ag: Vector;
+    ag: Vector2;
     /**
      * the alpha and blue component as Vector2
      */
-    ab: Vector;
+    ab: Vector2;
 
     /**
      * the red, green and alpha component as Vector3
      */
-    rga: Vector;
+    rga: Vector3;
     /**
      * the red, blue and alpha component as Vector3
      */
-    rba: Vector;
+    rba: Vector3;
     /**
      * the red, alpha and green component as Vector3
      */
-    rag: Vector;
+    rag: Vector3;
     /**
      * the red, alpha and blue component as Vector3
      */
-    rab: Vector;
+    rab: Vector3;
 
     /**
      * the green, red and alpha component as Vector3
      */
-    gra: Vector;
+    gra: Vector3;
     /**
      * the green, blue and alpha component as Vector3
      */
-    gba: Vector;
+    gba: Vector3;
     /**
      * the green, alpha and red component as Vector3
      */
-    gar: Vector;
+    gar: Vector3;
     /**
      * the green, alpha and blue component as Vector3
      */
-    gab: Vector;
+    gab: Vector3;
 
     /**
      * the blue, red and alpha component as Vector3
      */
-    bra: Vector;
+    bra: Vector3;
     /**
      * the blue, green and alpha component as Vector3
      */
-    bga: Vector;
+    bga: Vector3;
     /**
      * the blue, alpha and red component as Vector3
      */
-    bar: Vector;
+    bar: Vector3;
     /**
      * the blue, alpha and green component as Vector3
      */
-    bag: Vector;
+    bag: Vector3;
 
     /**
      * the alpha, red and green component as Vector3
      */
-    arg: Vector;
+    arg: Vector3;
     /**
      * the alpha, red and blue component as Vector3
      */
-    arb: Vector;
+    arb: Vector3;
     /**
      * the alpha, green and red component as Vector3
      */
-    agr: Vector;
+    agr: Vector3;
     /**
      * the alpha, green and blue component as Vector3
      */
-    agb: Vector;
+    agb: Vector3;
     /**
      * the alpha, blue and red component as Vector3
      */
-    abr: Vector;
+    abr: Vector3;
     /**
      * the alpha, blue and green component as Vector3
      */
-    abg: Vector;
-
+    abg: Vector3;
+}
+export interface Vector4 extends BaseVector4WithAccessors {
     plus(other: Vector4): Vector4;
     times(scalar: number): Vector4;
     minus(other: Vector4): Vector4;
@@ -382,7 +402,7 @@ const extendVector = (v: BaseVector) => {
             } else if (typeof prop === "string") {
                 if (prop.length > 1 && prop.match(/[xyz]{2,3}|[rgba]{2,4}/)) {
                     let names = prop.split("");
-                    let values = names.map(name => obj[name]);
+                    let values = names.map((name) => obj[name]);
                     return vector(...values);
                 } else if (prop.match(/\d+/)) {
                     return obj.get(parseInt(prop, 10));
@@ -403,7 +423,7 @@ const extendVector = (v: BaseVector) => {
                 }
             }
             return Reflect.set(obj, prop, value, receiver);
-        }
+        },
     });
 };
 
@@ -424,7 +444,8 @@ export const vector2 = (...components: number[]): Vector2 => {
     if (components.length !== 2) {
         throw new Error("vector2 expected 2 components");
     }
-    return extendVector(new BaseVector2(...components)) as Vector2;
+    let v2 = new RealVector2(...components);
+    return extendVector(v2) as Vector2;
 };
 
 export const vector3 = (...components: number[]): Vector3 => {

@@ -82,3 +82,31 @@ test("add different length vectors", () => {
         "can only add product vectors of same size, got 3 and 2"
     );
 });
+test("vector type after operations", () => {
+    let v1 = vector2(1, 2);
+    let v2 = vector2(1, 0);
+    let v3 = v1.plus(v2).times(1);
+    expect(v3.x).toBe(2);
+    expect(v3.y).toBe(2);
+});
+test("2D rotation", () => {
+    let v1 = vector2(1, 0);
+    let v2 = v1.rotate(Math.PI / 2);
+    expect(v2.x).toBeCloseTo(0);
+    expect(v2.y).toBeCloseTo(1);
+});
+test("zero vector", () => {
+    let v1 = vector2(0, 0);
+    expect(v1.x).toBe(0);
+    expect(v1.y).toBe(0);
+});
+test("logging", () => {
+    let v1 = vector2(1, 1);
+    console.log(v1);
+});
+test("cross product", () => {
+    let v1 = vector2(1, 0);
+    let v2 = vector2(0, 1);
+    expect(v1.cross(v2)).toBe(1);
+    expect(v2.cross(v1)).toBe(-1);
+});
