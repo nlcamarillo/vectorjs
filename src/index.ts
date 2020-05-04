@@ -137,6 +137,9 @@ class RealVector2 extends BaseVector2 {
     public cross(other: Vector2): number {
         return this.x * other.y - this.y * other.x;
     }
+    public angle(): number {
+        return Math.atan2(this.y, this.x);
+    }
 }
 class BaseVector3 extends BaseVector2 {
     /**
